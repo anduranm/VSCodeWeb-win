@@ -2,7 +2,7 @@
 
 ## Overview
 
-**VS Code Web Win** is a standalone desktop application built with Electron, designed to provide a powerful and efficient development environment for web developers. This app combines the familiar interface of Visual Studio Code with built-in Docker container management, all within a self-contained package optimized for Windows.
+**VS Code Web Win** is a standalone desktop application built with Electron, designed to provide a powerful and efficient development environment with your select files for developers. This app combines the familiar interface of Visual Studio Code with built-in Docker container management on the web for free, all within a self-contained package optimized for Windows.
 
 ## Features
 
