@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VS Code On Web</title>
+  <!-- Bootstrap CDN -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .form-container {
+      background-color: #222;
+      border: 2px solid #fff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .form-group label {
+      color: #fff;
+    }
+
+    .volume-list {
+      margin-top: 20px;
+    }
+
+    .volume-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 5px;
+      background-color: #333;
+      border-radius: 5px;
+    }
+
+    .volume-item button {
+      margin-left: 10px;
+    }
+
+    .container-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .btn {
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container my-4 container-flex">
+    <!-- Docker Container Configuration -->
+    <div class="form-container">
+      <h2 class="mb-4">Code-Server Container</h2>
+      <form id="docker-form">
+        <div class="form-group">
+          <label for="port">Port:</label>
+          <input type="text" id="port" name="port" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="text" id="password" name="password" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <div class="volume-list" id="volume-list">
+            <!-- List of volumes will be added here -->
+          </div>
+          <button type="button" class="btn btn-primary" id="add-volume">Add Volume</button>
+        </div>
+        <button type="button" class="btn btn-success" onclick="saveDockerConfiguration()">Save Configuration</button>
+        <hr>
+        
+      </form>
+    </div>
+
+    <!-- Network Configuration -->
+    <div class="form-container">
+      <h2 class="mb-4">Tunnel Configuration</h2>
+      <form id="network-form">
+        <div class="form-group">
+          <label for="domain">Domain:</label>
+          <input type="text" id="domain" name="domain" class="form-control" required>
+          <hr>
+          <button type="button" class="btn btn-success" onclick="saveConfiguration()">Save
+            Configuration</button>
+          <hr>
+          <h4>VSCode Web link:</h4>
+          <a id="tunnel-url" href="#" target="_blank">Push Start on the tray icon to show it!</a>
+          <hr>
+          <h4>Tunel password:</h4>
+          <a href="https://loca.lt/mytunnelpassword" target="_blank">https://loca.lt/mytunnelpassword</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="d-flex flex-row justify-content-center w-100">
+      <button type="button" id="mount-docker" class="btn btn-info mr-2">Mount Docker Container</button>
+      <button type="button" id="update-docker" class="btn btn-warning mr-2 text-light">Update Docker Container</button>
+      <button type="button" id="delete-docker" class="btn btn-danger">Delete Docker Container</button>
+    </div>
+    
+    
+
+  </div>
+
+  <!-- Bootstrap and jQuery Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!--  Script de dominio y puerto  y actualizacion de -->
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Cargar configuración cuando se carga la página
+      const config = await window.api.loadConfig();
+
+      // Colocar los valores de config en los inputs
+      document.getElementById('port').value = config.port || '';
+      document.getElementById('domain').value = config.domain || '';
+    });
+
+    // Guardar configuración cuando se presiona el botón de guardar
+    function saveConfiguration() {
+      const port = document.getElementById('port').value;
+      const domain = document.getElementById('domain').value;
+
+      // Envía la nueva configuración al proceso main para guardarla
+      window.api.saveConfig({ port, domain });
+    }
+
+    // Mostrar la URL del túnel cuando se reciba del proceso main
+    window.api.updateTunnelUrl((event, url) => {
+      document.getElementById('tunnel-url').textContent = url;
+      document.getElementById('tunnel-url').href = url;
+    });
+  </script>
+  <!-- docker -->
+  <script>
+
+  </script>
+  <script src="renderer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+{
+  "name": "vscodeweb",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "keywords": [
+    "electron",
+    "vscode",
+    "web"
+  ],
+  "author": "github.com/anduranm",
+  "license": "ISC",
+  "description": "VS Code On Web",
+  "devDependencies": {
+    "electron": "^31.3.1",
+    "electron-builder": "^25.0.4"
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.6",
+    "js-yaml": "^4.1.0",
+    "localtunnel": "^2.0.2"
+  },
+  "build": {
+  "appId": "com.aduranm.vscodeweb",
+  "productName": "VSCodeWeb",
+  "files": [
+    "src/**/*",
+    "icon.ico",
+    "main.js",
+    "preload.js",
+    "package.json",
+    "node_modules/**/*"
+  ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "copyright": "Copyright © 2024 github.com/anduranm",
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
