@@ -33,7 +33,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-If you encounter issues or have questions, open an issue on the [GitHub repository](https://github.com/anduranm/vscode-web-win/issues).
+If you encounter issues or have questions, open an issue on the [GitHub repository](https://github.com/anduranm/VSCodeWeb-win/issues).
 
 ## Roadmap
 
