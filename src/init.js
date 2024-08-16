@@ -224,12 +224,7 @@ function startDocker(callback) {
             setTimeout(() => {
               exec("docker info", (infoError) => {
                 if (infoError) {
-                  dialog.showErrorBox(
-                    "Docker No Está Corriendo",
-                    "Docker aún no está en ejecución. Asegúrate de que Docker Desktop esté iniciado."
-                  );
                   // app.quit(); no seguir corriendo de todas maneras 
-
                   dockerRunning = true;
                   callback();
                 } else {
@@ -237,7 +232,7 @@ function startDocker(callback) {
                   callback();
                 }
               });
-            }, 8000); // Espera 8 segundos para que Docker se inicie
+            }, 5000); // Espera 8 segundos para que Docker se inicie
           }
         }
       );
