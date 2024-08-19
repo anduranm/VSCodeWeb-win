@@ -12,7 +12,7 @@
     "web"
   ],
   "author": "github.com/anduranm",
-  "license": "ISC",
+  "license": "MIT",
   "description": "VS Code On Web",
   "devDependencies": {
     "electron": "^31.3.1",
