@@ -1,0 +1,10 @@
+node_modules/
+dist/
+build/
+out/
+.venv/
+__pycache__/
+
+# El instalador empaquetado y el Electron desempacado: binarios, no fuente.
+dist/
+*.exe

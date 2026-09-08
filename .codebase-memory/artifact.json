@@ -1,0 +1,11 @@
+{
+    "schema_version": 2,
+    "commit": "983245a936d6216ca51b4ed76d9f2e3f1e38eea9",
+    "indexed_at": "2026-09-08T07:47:03Z",
+    "project": "vs-code-web-win-setup",
+    "nodes": 124,
+    "edges": 273,
+    "original_size": 1769472,
+    "compressed_size": 109597,
+    "compression_level": 9
+}
