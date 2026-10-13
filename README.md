@@ -1,49 +1,39 @@
-# VS Code Web Win
+# VSCodeWeb (vs-code-web-win-setup)
 
-## Overview
+Aplicación de escritorio para Windows, hecha con Electron, que ejecuta **VS Code en el navegador** (`code-server`) dentro de un contenedor Docker y lo publica en `http://localhost:8888`. Se maneja desde la bandeja del sistema y, de forma opcional, se expone a Internet con un túnel `localtunnel`.
 
-**VS Code Web Win** is a standalone desktop application built with Electron, designed to provide a powerful and efficient development environment with your select files for developers. This app combines the familiar interface of Visual Studio Code with built-in Docker container management on the web for free, all within a self-contained package optimized for Windows.
+> El repositorio remoto es `anduranm/VSCodeWeb-win`; la carpeta local se llama `vs-code-web-win-setup`.
 
-## Features
+## Requisitos
+- Windows con **Docker Desktop** instalado (no se empaqueta).
+- Node.js para desarrollo.
+- Internet para el túnel y para los estilos de la interfaz (se cargan de un CDN).
 
-- **Integrated Docker Management:** Easily start, stop, and manage Docker containers directly within the app.
-- **Standalone Environment:** All necessary dependencies are bundled, so you can start developing right away without any additional installations.
-- **Customizable:** Support for extensions and custom settings to personalize your development experience.
+## Uso
+```bash
+npm install
+npm start          # modo desarrollo
+npm run build      # instalador NSIS en dist/
+```
+También hay un instalador compilado en la raíz: `VSCodeWeb Setup 1.0.0.exe`.
 
-## Installation
+Primer uso: cambiar la contraseña, agregar carpetas, **Save Configuration**, **Mount Docker Container** y luego **Start** en el icono de la bandeja.
 
-### Steps
+## Seguridad
+- La contraseña por defecto es `default`. **Cámbiala antes de usar el túnel**: con el túnel abierto, cualquiera con la URL ve un editor con terminal sobre las carpetas montadas.
+- El `docker-compose.yml` lo genera la app en su carpeta de datos de usuario, no está en el repo.
 
-1. **Download the latest Setup here
-2. **Unpack and run** the application on your Windows system.
+## Documentación (`docs/`)
+| Archivo | Contenido |
+|---|---|
+| [`docs/ERS.md`](docs/ERS.md) | Requisitos funcionales y no funcionales, modelo de datos y trazabilidad |
+| [`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md) | Módulos, IPC, despliegue y dependencias |
+| [`docs/FLUJOS.md`](docs/FLUJOS.md) | 9 flujos con diagramas SVG en [`docs/flujos/`](docs/flujos/) |
+| [`docs/BORDES.md`](docs/BORDES.md) | Casos límite, errores y hallazgos de seguridad |
+| [`docs/OPERACION.md`](docs/OPERACION.md) | Configuración, respaldos y runbook |
+| [`docs/ROADMAP.md`](docs/ROADMAP.md) | Mejoras previstas por prioridad |
 
-## Usage
+Más contexto para quien mantiene el código: [`CLAUDE.md`](CLAUDE.md).
 
-- Launch the application to start coding with the full power of Visual Studio Code on the web.
-- Use the integrated Docker management tools to control your containers directly from the app interface.
-- Customize the IDE with extensions and configurations to fit your workflow.
-
-## Contributing
-
-Contributions are welcome! Fork the repository, make your changes, and submit a pull request. Be sure to follow the coding guidelines and include relevant tests.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-If you encounter issues or have questions, open an issue on the [GitHub repository](https://github.com/anduranm/VSCodeWeb-win/issues).
-
-## Roadmap
-
-• Expand Docker management features.
-• Enhance performance and cross-platform compatibility.
-• Integrate additional developer tools and features.
-
-## Acknowledgements
-
-- [Electron](https://www.electronjs.org/)
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Docker](https://www.docker.com/)
-- [Code Server](https://github.com/coder/code-server)
+## Licencia
+MIT, ver [LICENSE](LICENSE).

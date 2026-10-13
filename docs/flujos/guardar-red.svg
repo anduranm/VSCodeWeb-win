@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 724" width="800" height="724" font-family="Arial, Helvetica, sans-serif" font-size="13">
+<title>Guardar dominio y puerto del túnel</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#374151"/></marker></defs>
+<rect width="800" height="724" fill="#ffffff"/>
+<rect x="185" y="20" width="150" height="40" rx="20" fill="#e5e7eb" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="44.5">Inicio</tspan></text>
+<line x1="260" y1="60" x2="260" y2="94" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<polygon points="116,94 420,94 404,150 100,150" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="118">Usuario edita Port y Domain y</tspan><tspan x="260" y="135">pulsa Save Configuration (red)</tspan></text>
+<line x1="260" y1="150" x2="260" y2="184" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="100" y="184" width="320" height="56" fill="#ffffff" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="208">saveConfiguration lee ambos inputs y</tspan><tspan x="260" y="225">llama a api.saveConfig</tspan></text>
+<line x1="260" y1="240" x2="260" y2="274" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="100" y="274" width="320" height="56" fill="#ffffff" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="298">IPC save-config: updateConfig mezcla</tspan><tspan x="260" y="315">con loadConfig()</tspan></text>
+<line x1="260" y1="330" x2="260" y2="364" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<polygon points="260,364 425,407.0 260,450 95,407.0" fill="#fef9c3" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="399.0">¿config.json existe y se</tspan><tspan x="260" y="416.0">puede parsear?</tspan></text>
+<text x="268" y="470" font-size="12" font-weight="bold" fill="#b45309">Sí</text>
+<line x1="425" y1="407.0" x2="480" y2="407.0" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/><text x="431" y="401.0" font-size="12" font-weight="bold" fill="#b45309">No</text>
+<rect x="480" y="370.5" width="220" height="73" fill="#ffffff" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="590" y="394.5">Recrear config.json con</tspan><tspan x="590" y="411.5">valores por defecto (port</tspan><tspan x="590" y="428.5">8888, domain vacío)</tspan></text>
+<line x1="590" y1="443.5" x2="590" y2="467.5" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="545" y="467.5" width="90" height="36" rx="18" fill="#e5e7eb" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="590" y="490.5">Fin</tspan></text>
+<line x1="260" y1="450" x2="260" y2="484" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="100" y="484" width="320" height="56" fill="#ffffff" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="508">saveConfig escribe config.json en</tspan><tspan x="260" y="525">userData</tspan></text>
+<line x1="260" y1="540" x2="260" y2="574" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<polygon points="116,574 420,574 404,630 100,630" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="598">Diálogo «Config Saved:</tspan><tspan x="260" y="615">LocalTunnel saved»</tspan></text>
+<line x1="260" y1="630" x2="260" y2="664" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="185" y="664" width="150" height="40" rx="20" fill="#e5e7eb" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="688.5">Fin</tspan></text>
+</svg>

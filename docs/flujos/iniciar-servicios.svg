@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="800" height="900" font-family="Arial, Helvetica, sans-serif" font-size="13">
+<title>Iniciar servicios (Start): contenedor y túnel</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#374151"/></marker></defs>
+<rect width="800" height="900" fill="#ffffff"/>
+<rect x="185" y="20" width="150" height="40" rx="20" fill="#e5e7eb" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="44.5">Inicio</tspan></text>
+<line x1="260" y1="60" x2="260" y2="94" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<polygon points="116,94 420,94 404,150 100,150" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="118">Usuario elige Start en la</tspan><tspan x="260" y="135">bandeja</tspan></text>
+<line x1="260" y1="150" x2="260" y2="184" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="100" y="184" width="320" height="39" fill="#ffffff" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="208">loadConfig: leer port y domain</tspan></text>
+<line x1="260" y1="223" x2="260" y2="257" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="100" y="257" width="320" height="39" fill="#ffffff" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="281">exec «docker start code-server»</tspan></text>
+<line x1="260" y1="296" x2="260" y2="330" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<polygon points="260,330 425,373.0 260,416 95,373.0" fill="#fef9c3" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="365.0">¿docker start terminó</tspan><tspan x="260" y="382.0">sin error?</tspan></text>
+<text x="268" y="436" font-size="12" font-weight="bold" fill="#b45309">Sí</text>
+<line x1="425" y1="373.0" x2="480" y2="373.0" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/><text x="431" y="367.0" font-size="12" font-weight="bold" fill="#b45309">No</text>
+<rect x="480" y="345.0" width="220" height="56" fill="#ffffff" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="590" y="369.0">Diálogo «Docker Error» y</tspan><tspan x="590" y="386.0">se detiene el flujo</tspan></text>
+<line x1="590" y1="401.0" x2="590" y2="425.0" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="545" y="425.0" width="90" height="36" rx="18" fill="#e5e7eb" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="590" y="448.0">Fin</tspan></text>
+<line x1="260" y1="416" x2="260" y2="450" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="100" y="450" width="320" height="56" fill="#ffffff" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="474">localtunnel(port, {subdomain:</tspan><tspan x="260" y="491">domain, host: loca-lt})</tspan></text>
+<line x1="260" y1="506" x2="260" y2="540" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<polygon points="260,540 425,583.0 260,626 95,583.0" fill="#fef9c3" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="575.0">¿el túnel se abrió sin</tspan><tspan x="260" y="592.0">error?</tspan></text>
+<text x="268" y="646" font-size="12" font-weight="bold" fill="#b45309">Sí</text>
+<line x1="425" y1="583.0" x2="480" y2="583.0" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/><text x="431" y="577.0" font-size="12" font-weight="bold" fill="#b45309">No</text>
+<rect x="480" y="546.5" width="220" height="73" fill="#ffffff" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="590" y="570.5">Diálogo «LocalTunnel</tspan><tspan x="590" y="587.5">Error» (el contenedor</tspan><tspan x="590" y="604.5">sigue corriendo)</tspan></text>
+<line x1="590" y1="619.5" x2="590" y2="643.5" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="545" y="643.5" width="90" height="36" rx="18" fill="#e5e7eb" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="590" y="666.5">Fin</tspan></text>
+<line x1="260" y1="626" x2="260" y2="660" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="100" y="660" width="320" height="56" fill="#ffffff" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="684">Enviar updateTunnelUrl a la ventana</tspan><tspan x="260" y="701">y mostrar la URL en el enlace</tspan></text>
+<line x1="260" y1="716" x2="260" y2="750" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<polygon points="116,750 420,750 404,806 100,806" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="774">Diálogo «LocalTunnel Started»</tspan><tspan x="260" y="791">con la URL pública</tspan></text>
+<line x1="260" y1="806" x2="260" y2="840" stroke="#374151" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="185" y="840" width="150" height="40" rx="20" fill="#e5e7eb" stroke="#374151" stroke-width="1.5"/><text text-anchor="middle" font-size="13" fill="#1f2937"><tspan x="260" y="864.5">Fin</tspan></text>
+</svg>
