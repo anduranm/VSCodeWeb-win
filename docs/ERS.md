@@ -26,7 +26,7 @@ Fuera de alcance: instalar Docker, descargar extensiones, multiusuario, macOS/Li
 ## 2. Descripción general
 
 ### 2.1 Perspectiva del producto
-App Electron de dos procesos: principal (`src/main.js` + `src/init.js` + `src/docker.js`) y renderer (`src/index.html` + `src/renderer.js`) unidos por `src/preload.js` (`contextIsolation: true`, `nodeIntegration: false`, `src/init.js:113-115`). Habla con Docker mediante `child_process.exec` de la CLI (`docker`, `docker-compose`). Detalle en `docs/ARQUITECTURA.md`.
+App Electron de dos procesos: principal (`src/main.js` + `src/init.js` + `src/docker.js`) y renderer (`src/index.html` + `src/renderer.js`) unidos por `src/preload.js` (`contextIsolation: true`, `nodeIntegration: false`, `src/init.js:115-118`). Habla con Docker mediante `child_process.exec` de la CLI (`docker`, `docker-compose`). Detalle en `docs/ARQUITECTURA.md`.
 
 ### 2.2 Funciones (resumen)
 Verificación de Docker al arrancar; configuración de puerto, contraseña y carpetas; montar/actualizar/eliminar el contenedor; iniciar/detener/reiniciar servicio y túnel desde la bandeja; auto-arranque con Windows; ocultar a bandeja al cerrar la ventana.
@@ -38,7 +38,7 @@ Un solo rol: la persona dueña del equipo Windows. No hay cuentas. Quien alcance
 - Requiere Docker Desktop instalado; la ruta de arranque está fija en `C:\Program Files\Docker\Docker\Docker Desktop.exe` (`src/init.js:213`).
 - Usa el binario `docker-compose` (v1/standalone), no `docker compose` (`src/docker.js:195,213`).
 - Solo Windows (`nsis`, `package.json`).
-- Necesita red para `localtunnel.me` y para los CDN de Bootstrap/jQuery que carga `src/index.html:9,113-115`.
+- Necesita red para `localtunnel.me` y para los CDN de Bootstrap/jQuery que carga `src/index.html:9,116-118`.
 
 ### 2.5 Supuestos
 Docker responde a `docker info` en un máximo de ~5 s tras abrirse (`src/init.js:221-233`); el contenedor se llama `code-server` y no hay otro con ese nombre.
@@ -51,29 +51,29 @@ Docker responde a `docker info` en un máximo de ~5 s tras abrirse (`src/init.js
 | RF-02 | Si Docker no responde, intentar abrir Docker Desktop. | Con `docker info` fallido se lanza Docker Desktop y, tras 5 s, se continúa de todos modos. | `src/init.js:202-242` |
 | RF-03 | Crear un `docker-compose.yml` por defecto en userData si no existe. | Tras el arranque existe el archivo con el servicio `code-server` (puerto 8888:8080, `restart: 'no'`). | `src/docker.js:8-24,65-79,237-239` |
 | RF-04 | Crear `config.json` por defecto si falta o está corrupto. | Se escribe `{domain:"", port:8888}` sin lanzar excepción. | `src/init.js:17-40` |
-| RF-05 | Mostrar y guardar el puerto y el dominio del túnel. | Al pulsar Save Configuration de red, `config.json` contiene port y domain y aparece el diálogo «LocalTunnel saved». | `src/index.html:121-136`, `src/init.js:52-75`, `src/main.js:8-14` |
-| RF-06 | Mostrar y guardar puerto, contraseña y volúmenes del contenedor. | Al guardar, el compose queda con `puerto:8080`, `PASSWORD=<valor>` y la lista de volúmenes. | `src/renderer.js:105-112`, `src/docker.js:115-135` |
-| RF-07 | Agregar carpetas como volúmenes mediante selector nativo. | Cada carpeta elegida se agrega como `ruta:/home/coder/<carpeta>`. | `src/docker.js:143-156`, `src/renderer.js:144-168` |
-| RF-08 | Quitar un volumen de la lista. | La entrada desaparece de la lista; se persiste al guardar. | `src/renderer.js:114-135` |
+| RF-05 | Mostrar y guardar el puerto y el dominio del túnel. | Al pulsar Save Configuration de red, `config.json` contiene port y domain y aparece el diálogo «LocalTunnel saved». | `src/index.html:121-137`, `src/init.js:52-75`, `src/main.js:8-14` |
+| RF-06 | Mostrar y guardar puerto, contraseña y volúmenes del contenedor. | Al guardar, el compose queda con `puerto:8080`, `PASSWORD=<valor>` y la lista de volúmenes. | `src/renderer.js:41-48`, `src/docker.js:115-135` |
+| RF-07 | Agregar carpetas como volúmenes mediante selector nativo. | Cada carpeta elegida se agrega como `ruta:/home/coder/<carpeta>`. | `src/docker.js:143-156`, `src/renderer.js:80-104` |
+| RF-08 | Quitar un volumen de la lista. | La entrada desaparece de la lista; se persiste al guardar. | `src/renderer.js:50-71` |
 | RF-09 | Montar el contenedor. | `docker-compose up -d` se ejecuta contra el compose de userData; los errores salen en diálogo. | `src/docker.js:193-207` |
 | RF-10 | Actualizar el contenedor (recrearlo). | Se ejecuta `down`, 1 s después `up -d`. | `src/docker.js:230-235` |
 | RF-11 | Eliminar el contenedor. | Se ejecuta `docker-compose down`; los errores salen en diálogo. | `src/docker.js:209-226` |
 | RF-12 | Iniciar servicios desde la bandeja. | `docker start code-server` y túnel abierto hacia `config.port`; la URL se muestra en la ventana y en un diálogo. | `src/init.js:246-312` |
 | RF-13 | Detener servicios desde la bandeja. | Se cierra el túnel (si existe) y se ejecuta `docker stop code-server`. | `src/init.js:315-338` |
 | RF-14 | Reiniciar servicios. | Stop, espera fija de 3 s y Start. | `src/init.js:340-343` |
-| RF-15 | Alternar el auto-arranque con Windows. | La casilla Auto-Launch refleja el estado y alterna `auto-launch` enable/disable. | `src/init.js:72-106` |
-| RF-16 | Cerrar la ventana la oculta; salir solo con Quit. | La X oculta la ventana; Quit marca `isQuitting` y cierra. | `src/init.js:121-128,172-177` |
-| RF-17 | Abrir la ventana desde la bandeja (menú Config o doble clic). | La ventana se muestra o se crea si no existe. | `src/init.js:157-160,181-188` |
+| RF-15 | Alternar el auto-arranque con Windows. | La casilla Auto-Launch refleja el estado y alterna `auto-launch` enable/disable. | `src/init.js:74-107` |
+| RF-16 | Cerrar la ventana la oculta; salir solo con Quit. | La X oculta la ventana; Quit marca `isQuitting` y cierra. | `src/init.js:124-131,172-177` |
+| RF-17 | Abrir la ventana desde la bandeja (menú Config o doble clic). | La ventana se muestra o se crea si no existe. | `src/init.js:155-157,181-188` |
 | RF-18 | Enlazar la contraseña del túnel de localtunnel. | La interfaz ofrece el enlace `https://loca.lt/mytunnelpassword`. | `src/index.html:100` |
 
 ## 4. Requisitos no funcionales
 
 | ID | Categoría | Requisito | Estado verificado |
 |---|---|---|---|
-| RNF-01 | Seguridad | El renderer no tiene Node (`nodeIntegration:false`, `contextIsolation:true`). | Cumple (`src/init.js:113-115`). |
+| RNF-01 | Seguridad | El renderer no tiene Node (`nodeIntegration:false`, `contextIsolation:true`). | Cumple (`src/init.js:115-118`). |
 | RNF-02 | Seguridad | La contraseña por defecto no debe quedar expuesta por el túnel. | **No cumple**: el valor por defecto es `PASSWORD=default` (`src/docker.js:18`); ver B-01. |
 | RNF-03 | Seguridad | Los canales IPC deben validar su entrada. | **No cumple**: puerto y contraseña pasan sin validar (B-05, B-06). |
-| RNF-04 | Fiabilidad | Un `config.json` corrupto no impide arrancar. | Cumple (`src/init.js:35-40`). |
+| RNF-04 | Fiabilidad | Un `config.json` corrupto no impide arrancar. | Cumple (`src/init.js:31-39`). |
 | RNF-05 | Privacidad | La contraseña se guarda en texto plano en `docker-compose.yml` y se muestra en un `input type="text"`. | Hallazgo, ver B-02. |
 | RNF-06 | Disponibilidad | Funciona sin Internet para uso local. | **No cumple**: la interfaz depende de CDN para estilos (B-18). |
 | RNF-07 | Compatibilidad | Windows 10/11 con Docker Desktop. | Declarado; solo Windows (`package.json`). Sin verificar en ejecución. |
@@ -85,7 +85,7 @@ Docker responde a `docker info` en un máximo de ~5 s tras abrirse (`src/init.js
 - **Docker Desktop**: `start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"`.
 - **localtunnel**: `https://localtunnel.me` (tercero); URL pública por sesión.
 - **Windows**: bandeja, registro de auto-arranque (paquete `auto-launch`), diálogo de carpetas.
-- **CDN**: Bootstrap 4.5.2 (stackpath), jQuery 3.5.1, Popper 2.5.3 (`src/index.html:9,113-115`).
+- **CDN**: Bootstrap 4.5.2 (stackpath), jQuery 3.5.1, Popper 2.5.3 (`src/index.html:9,116-118`).
 
 ## 6. Modelo de datos
 | Archivo | Ubicación | Campos |
@@ -93,7 +93,7 @@ Docker responde a `docker info` en un máximo de ~5 s tras abrirse (`src/init.js
 | `config.json` | userData | `domain` (subdominio del túnel), `port` (puerto local publicado), `volumePath` (solo en la rama de recuperación, sin uso). |
 | `docker-compose.yml` | userData | `services.code-server`: `image`, `container_name`, `ports`, `environment` (`PUID`, `PGID`, `TZ`, `PASSWORD`), `volumes`, `restart`. |
 
-Valores por defecto en `src/docker.js:8-24` y `src/init.js:23,34`.
+Valores por defecto en `src/docker.js:8-24` y `src/init.js:22,36`.
 
 ## 7. Trazabilidad RF → módulo → prueba
 El repositorio no tiene pruebas automatizadas ni CI. **Ningún RF (RF-01…RF-18) tiene prueba.** La verificación es manual.

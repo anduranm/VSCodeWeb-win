@@ -36,7 +36,7 @@ flowchart LR
 
 ## 3. Cómo se hablan
 - **Renderer → principal**: `ipcRenderer.invoke` / `send` mediante `window.api` (`src/preload.js:3-22`). Canales: `load-config`, `save-config`, `read-docker-compose-file`, `save-docker-config`, `mount-docker-container`, `update-docker-container`, `delete-docker-container`, `select-folder`.
-- **Principal → renderer**: `loadConfig` (al terminar de cargar la ventana, `src/init.js:130-132`), `updateTunnelUrl` (`src/init.js:278`), `docker-config-saved` (`src/main.js:25`).
+- **Principal → renderer**: `loadConfig` (al terminar de cargar la ventana, `src/init.js:133-136`), `updateTunnelUrl` (`src/init.js:278`), `docker-config-saved` (`src/main.js:25`).
 - **Bandeja → servicios**: las opciones Start, Stop y Restart llaman directo a funciones de `init.js` (`src/init.js:152-160`), sin pasar por IPC.
 - **Dependencia circular**: `docker.js` importa `getMainWindow` de `init.js`; `init.js` no importa `docker.js`.
 
